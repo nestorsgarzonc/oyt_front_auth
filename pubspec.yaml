@@ -1,0 +1,25 @@
+name: oyt_front_auth
+description: A new Flutter package project.
+version: 0.0.1
+homepage: https://github.com/nestorsgarzonc
+publish_to: none
+
+environment:
+  sdk: ">=2.18.5 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  oyt_front_core:
+    path: ../oyt_front_core
+  flutter_riverpod: ^2.1.1
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
