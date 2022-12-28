@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_auth/data_source/auth_datasource.dart';
 import 'package:oyt_front_auth/models/auth_model.dart';
+import 'package:oyt_front_auth/models/login_model.dart';
 import 'package:oyt_front_auth/models/user_model.dart';
 import 'package:oyt_front_core/external/api_exception.dart';
 import 'package:oyt_front_core/failure/failure.dart';
@@ -11,7 +12,7 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 });
 
 abstract class AuthRepository {
-  Future<Either<Failure, AuthModel>> login(String email, String password);
+  Future<Either<Failure, AuthModel>> login(LoginModel loginModel);
   Future<Failure?> register(User user);
   Future<Failure?> logout();
   Future<Failure?> restorePassword(String email);
@@ -29,9 +30,9 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthDatasource authDatasource;
 
   @override
-  Future<Either<Failure, AuthModel>> login(String email, String password) async {
+  Future<Either<Failure, AuthModel>> login(LoginModel loginModel) async {
     try {
-      final res = await authDatasource.login(email, password);
+      final res = await authDatasource.login(loginModel);
       await authDatasource.saveToken(res.bearerToken);
       return Right(res);
     } on ApiException catch (e) {

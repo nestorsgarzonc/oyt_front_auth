@@ -1,18 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oyt_front_auth/models/auth_model.dart';
+import 'package:oyt_front_auth/models/login_model.dart';
 import 'package:oyt_front_auth/models/user_model.dart';
 import 'package:oyt_front_core/constants/db_constants.dart';
 import 'package:oyt_front_core/external/api_handler.dart';
 import 'package:oyt_front_core/external/db_handler.dart';
 import 'package:oyt_front_core/logger/logger.dart';
 
-
 final authDatasourceProvider = Provider<AuthDatasource>((ref) {
   return AuthDatasourceImpl.fromRead(ref);
 });
 
 abstract class AuthDatasource {
-  Future<AuthModel> login(String email, String password);
+  Future<AuthModel> login(LoginModel loginModel);
   Future<void> register(User user);
   Future<void> logout();
   Future<void> saveToken(String token);
@@ -34,11 +34,11 @@ class AuthDatasourceImpl implements AuthDatasource {
   final DBHandler dbHandler;
 
   @override
-  Future<AuthModel> login(String email, String password) async {
+  Future<AuthModel> login(LoginModel loginModel) async {
     try {
       final res = await apiHandler.post(
         '/auth/login',
-        {'email': email, 'password': password},
+        loginModel.toJson(),
       );
       return AuthModel.fromJson(res.responseMap!);
     } catch (e, s) {
