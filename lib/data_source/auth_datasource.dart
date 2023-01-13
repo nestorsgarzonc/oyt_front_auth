@@ -19,6 +19,7 @@ abstract class AuthDatasource {
   Future<void> deleteToken();
   Future<String?> getToken();
   Future<AuthModel> getUserByToken();
+  Future<void> chooseRestaurantId(String id);
 }
 
 class AuthDatasourceImpl implements AuthDatasource {
@@ -123,6 +124,16 @@ class AuthDatasourceImpl implements AuthDatasource {
       return dbHandler.delete(DbConstants.bearerTokenKey, DbConstants.authBox);
     } catch (e, s) {
       Logger.logError(e.toString(), s);
+    }
+  }
+
+  @override
+  Future<void> chooseRestaurantId(String id) async {
+    try {
+      await dbHandler.put(DbConstants.restaurantsKey, id, DbConstants.restaurantBox);
+    } catch (e, s) {
+      Logger.logError(e.toString(), s);
+      rethrow;
     }
   }
 }

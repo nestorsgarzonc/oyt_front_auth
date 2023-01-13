@@ -17,6 +17,7 @@ abstract class AuthRepository {
   Future<Failure?> logout();
   Future<Failure?> restorePassword(String email);
   Future<Either<Failure, AuthModel?>> getUserByToken();
+  Future<Failure?> chooseRestaurantId(String id);
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -78,6 +79,16 @@ class AuthRepositoryImpl implements AuthRepository {
     } catch (e) {
       await authDatasource.deleteToken();
       return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Failure?> chooseRestaurantId(String id) async {
+    try {
+      await authDatasource.chooseRestaurantId(id);
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
     }
   }
 }

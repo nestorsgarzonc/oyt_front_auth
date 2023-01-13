@@ -13,9 +13,6 @@ dependencies:
     sdk: flutter
   oyt_front_core:
     path: ../oyt_front_core
-  flutter_riverpod: ^2.1.1
-  equatable: ^2.0.5
-  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
