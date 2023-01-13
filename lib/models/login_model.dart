@@ -15,7 +15,7 @@ class LoginModel extends Equatable {
 
   final String email;
   final String password;
-  final String deviceToken;
+  final String? deviceToken;
 
   Map<String, dynamic> toJson() => {
         'email': email,
