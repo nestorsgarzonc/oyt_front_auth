@@ -49,6 +49,8 @@ class User extends Equatable {
   final String? tokenType;
   final String? id;
 
+  String get userName => '$firstName $lastName';
+
   User copyWith({
     String? firstName,
     String? lastName,
