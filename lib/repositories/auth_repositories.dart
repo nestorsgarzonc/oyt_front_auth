@@ -36,8 +36,6 @@ class AuthRepositoryImpl implements AuthRepository {
       final res = await authDatasource.login(loginModel);
       await authDatasource.saveToken(res.bearerToken);
       return Right(res);
-    } on ApiException catch (e) {
-      return Left(Failure(e.response.responseMap.toString()));
     } catch (e) {
       return Left(Failure(e.toString()));
     }
