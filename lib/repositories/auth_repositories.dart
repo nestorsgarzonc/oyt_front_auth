@@ -4,7 +4,6 @@ import 'package:oyt_front_auth/data_source/auth_datasource.dart';
 import 'package:oyt_front_auth/models/auth_model.dart';
 import 'package:oyt_front_auth/models/login_model.dart';
 import 'package:oyt_front_auth/models/user_model.dart';
-import 'package:oyt_front_core/external/api_exception.dart';
 import 'package:oyt_front_core/failure/failure.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
